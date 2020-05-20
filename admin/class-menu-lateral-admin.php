@@ -107,10 +107,16 @@ class Menu_Lateral_Admin {
 		
 		//add_submenu_page( '$parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
 		add_submenu_page( $this->plugin_name, 'Menu Lateral Settings', 'Settings', 'administrator', $this->plugin_name.'-settings', array( $this, 'displayPluginAdminSettings' ));
+
+		add_submenu_page( $this->plugin_name, 'query', 'Queries', 'administrator', $this->plugin_name.'-query', array( $this, 'displayPluginAdminQuery' ));
 		}
 
 	public function displayPluginAdminDashboard() {
 			require_once 'partials/'.$this->plugin_name.'-admin-display.php';
+	  }
+
+	  public function displayPluginAdminQuery() {
+			require_once 'partials/'.$this->plugin_name.'-admin-query-display.php';
 	  }
 
 	  public function displayPluginAdminSettings() {
