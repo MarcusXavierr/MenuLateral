@@ -19,7 +19,7 @@
 		        <h2>Configurações menu lateral</h2>  
 		         <!--NEED THE settings_errors below so that the errors/success messages are shown after submission - wasn't working once we started using add_menu_page and stopped using add_options_page so needed this-->
 				 <?php settings_errors(); ?>  
-    <form method="POST" action="admin.php?page=menu-lateral-query">
+    <form method="POST" action="../wp-content/plugins/menu-lateral/admin/partials/menu-lateral-admin-query-display.php">
 		<div class="form-group">
 			<label for="">URL</label>
 			<input type="text" class="form-control" name="url" placeholder="Insira a URL da página">
