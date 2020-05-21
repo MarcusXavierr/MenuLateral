@@ -47,12 +47,7 @@ class Menu_Lateral_Public {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
-
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-
-	}
+	
 
 	/**
 	 * Register the stylesheets for the public-facing side of the site.
@@ -99,5 +94,205 @@ class Menu_Lateral_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/menu-lateral-public.js', array( 'jquery' ), $this->version, false );
 
 	}
+
+	public function line_before_header(){
+		$url_atual = get_permalink();
+		
+		?>
+		<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+		<style>
+			
+		@media screen and (min-width: 1000px){
+			.main-header-container {
+				width:1070px;
+				float:center;
+				margin-left:auto; 
+				margin-right:auto;
+	
+			}
+			#largura{
+				width:1070px;
+				float:center;
+				margin-left:auto; 
+				margin-right:auto;
+				
+			}
+		}
+		
+		@media screen and (max-width: 10000px) {
+			/* Estilização do css da barra superior em telas de computador */
+			.imondelli-column{
+				width: 100%;
+				height:25px;
+				color:white;
+				background-color: #28000a;
+				font-size:15px;
+				overflow: hidden;
+				
+			}
+			.padd{
+				margin-left:auto; 
+				margin-right:auto;
+			}
+			
+			.icon-padd{
+				padding-left:8px;
+				padding-right:8px;
+			}
+			.imondelli-left{
+				float:left;
+			}
+			.imondelli-center{
+				text-align:center;	
+			}
+			.imondelli-right{
+				float:right;
+			}
+			.link{
+				text-decoration: none;
+				color:white;
+			}
+			.link:hover{
+				color:#EAD2AC;
+			}
+				.glink{
+				padding-left: 10px;
+				padding-right:10px
+			}
+			.imondelli-center{
+				float:right;
+			}
+	
+			/* Estilização css do botão e menu lateral no computador */
+			.imondelli-button{
+				background-color: #28000a;
+			}
+			.imondelli-button:hover{
+				background-color: #28000a;
+			}
+			.imondelli-button:focus{
+				background-color: #28000a;
+			}
+			.padding_superior_menu_lateral{
+				padding-top: 80px
+			}
+			#menu_lateral{
+				display:none;
+				position: absolute;
+				z-index: 1000;
+				background-color:#3B0A11;
+				color: white;
+				border-bottom-left-radius:15px;
+				border-bottom-right-radius:15px;
+				font-size:18px;
+				height: 370;
+				padding-top:30px;
+				padding-bottom:30px;
+				font-family:'Roboto';
+				font-weight: 300;
+	
+			}
+			.menu_lateral{
+				padding-left:15px;
+				padding-right:25px;
+				
+			}
+			.titulo{
+				color:white;
+			}
+			.link_menu{
+				font-size:17px;
+			}
+			
+			
+		}
+		@media screen and (max-width: 992px) {
+			  .imondelli-right{
+				display:none;
+			}
+			
+			
+			.padd{
+			padding-left:20px;
+			padding-right:20px;
+		   }
+		}
+		
+		
+		</style>
+		
+		
+		<div class="imondelli-column" >
+			<div class="padd" id="largura">
+				<div class="imondelli-left" id="container">
+				<div></div>
+				<button onclick="esconder_mostrar()" class="imondelli-button" id="imondelli-button"> <i class="fas fa-bars fa-xs"></i> </button>
+				<a href="https://www.facebook.com/instituto.mondelli/" class="link" target="_blank"><i class="fab fa-facebook-f icon-padd"></i></a>
+				<a href="https://www.instagram.com/institutomondelli/" class="link" target="_blank"><i class="fab fa-instagram icon-padd"></i></a>
+				<a href="https://www.youtube.com/channel/UCeFYDwgRJ2hVwaNHecHZSbQ" class="link" target="_blank"><i class="fab fa-youtube icon-padd"></i></a>
+				<a href="https://br.linkedin.com/in/instituto-mondelli-de-odontologia-a43135188" class="link" target="_blank"><i class="fab fa-linkedin-in icon-padd"></i></a>
+				</div>
+			
+				<div class="imondelli-right	">
+				<!-- Later add a link for those links -->
+					<a href="https://imondelli.com/cadastro/" class="link icon-padd" style="font-size:13px" target="_blank">Fale conosco</a>
+					<a href="https://api.whatsapp.com/send?phone=5514997300618&text=&source=&data=" class="link icon-padd"  style="font-size:13px" target="_blank">Ouvidoria</a>
+				   
+				</div>
+				<div class="imondelli-center">
+				<?php echo do_shortcode('[gtranslate]'); ?>
+				</div>
+			</div>
+		</div>  
+	
+		<script>
+			function esconder_mostrar() {
+			var x = document.getElementById("menu_lateral");
+			if (x.style.display == "none") {
+				x.style.display = "block";
+			} else {
+				x.style.display = "none";
+			}
+			}
+	</script>                  
+		<?php
+		}
+		
+		
+	
+		//Barra Lateral
+	
+		public function barra_lateral(){?>
+	
+		<div id="menu_lateral" style="display:none">
+			<div class="menu_lateral">
+				<div class="sidebar-main">
+					<aside id="nav_menu-2" class="widget widget_nav_menu"><h2 class="widget-title titulo ">Mais sobre nós</h2>
+						<div class="menu-menu-container">
+						<ul id="menu-menu" class="menu">
+							<li id="menu-item-1499" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1499"><a href="https://imondelli.com/nossas-publicacoes/" class="link link_menu">Nossas publicações</a></li>
+							<li id="menu-item-1500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1500"><a href="https://imondelli.com/eventos/" class="link link_menu">Eventos</a></li>
+							<li id="menu-item-1501" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1501"><a href="https://imondelli.com/sucursais/" class="link link_menu">Sucursais</a></li>
+							<li id="menu-item-1502" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1502"><a href="https://imondelli.com/blog/" class="link link_menu">Blog</a></li>
+							<li id="menu-item-1503" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1503"><a href="https://imondelli.com/cadastro/" class="link link_menu">Cadastro</a></li>
+							<li id="menu-item-1504" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1504"><a href="https://imondelli.com/filosofia-toi/" class="link link_menu">Filosofia TOI</a></li>
+						</ul>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+	
+		<?php 
+		}
+		
+		public function __construct( $plugin_name, $version ) {
+
+			$this->plugin_name = $plugin_name;
+			$this->version = $version;
+			add_action('wp_head',array( $this, 'line_before_header' ));
+			add_action('astra_primary_content_top',array( $this, 'barra_lateral' ));
+	
+		}
 
 }
