@@ -25,11 +25,13 @@
 					 $results = $wpdb->get_results("SELECT url,link FROM {$wpdb->prefix}menuLateral;");
 				 ?>  
     <form method="POST" action="../wp-content/plugins/menu-lateral/admin/partials/menu-lateral-admin-query-display.php">
+		<div class="mb-3 mt-2 d-flex">
+			<div class="btn btn-primary" onclick="adicionar()">Adicionar link</div>
+			<div class="btn btn-danger" onclick="remover()">Remover link</div>
+		</div> 
 		<?php foreach($results as $result) { ?>
-			<div>
-			<div class="btn btn-primary mb-3 mt-2" onclick="adicionar()">Adicionar link</div>
-		</div>  
-			
+			 
+		<div class="campo">	
 		<div class="form-group">
 			<label for="">URL</label>
 			<input type="text" class="form-control" name="url" placeholder="Insira a URL da página" value="<?=$result->url?>">
@@ -37,6 +39,7 @@
 		<div class="form-group">
 			<label for="">Nome</label>
 			<input type="text" class="form-control" name="link_name" placeholder="Insira a o nome da página" value="<?=$result->link?>">
+		</div>
 		</div>
 		<div id="novosCampos"></div>  
 		<?php } ?>
@@ -53,8 +56,17 @@
 <script>
 	function adicionar()
 	{
-		alert('deu certo');
 		var campo = document.getElementById('novosCampos');
-		campo.innerHTML += '<div class="form-group"><label for="">URL</label><input type="text" class="form-control" name="url" placeholder="Insira a URL da página"></div><div class="form-group"><label for="">Nome</label><input type="text" class="form-control" name="link_name" placeholder="Insira a o nome da página"></div>'
+		campo.innerHTML += '<div class="campo"><div class="form-group"><label for="">URL</label><input type="text" class="form-control" name="url" placeholder="Insira a URL da página"></div><div class="form-group"><label for="">Nome</label><input type="text" class="form-control" name="link_name" placeholder="Insira a o nome da página"></div></div>'
+	}
+
+	function remover()
+	{
+		
+			var campos = document.getElementsByClassName('campo');
+			var lastCampo = campos.length - 1
+			campos[lastCampo].innerHTML = "";
+			var lastCampo = campos.lenght - 1
+			campos = document.getElementsByClassName('campo');
 	}
 </script>
