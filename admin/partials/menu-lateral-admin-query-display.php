@@ -71,25 +71,6 @@ function menu_lateral_data()
 }
 
 
-function recupera()
-{
-    global $wpdb;
 
-    $results = $wpdb->get_results("SELECT url,link FROM wp_menuLateral");
 
-    foreach($results as $result)
-    {
-        echo $result->url;
-        echo "<br>";
-        echo $result->link;
-    }
-
-    //print_r($results);
-}
-
-recupera();
-//create_table();
-//menu_lateral_data();
-
-//register_activation_hook( '', 'menu_lateral_data' );
 
