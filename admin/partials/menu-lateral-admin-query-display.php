@@ -19,34 +19,7 @@ function varDump($data)
 
 varDump($_POST);
 
-function create_table()
-{
-    try{
-        global $wpdb;
 
-    $table_name = $wpdb->prefix . "menuLateral";
-
-    $charset_collate = $wpdb->get_charset_collate();
-
-    
-
-    $sql = "Create table if not exists $table_name(
-            id mediumint(9) NOT NULL AUTO_INCREMENT,
-            url varchar(250),
-            link varchar(100),
-            PRIMARY KEY  (id)
-            )$charset_collate;";
-
-    require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
-
-    dbDelta($sql);
-    echo "deu certo";
-    }catch(Error $e)
-    {
-        var_dump($e);
-    }
-    
-}
 
 function menu_lateral_data()
 {
