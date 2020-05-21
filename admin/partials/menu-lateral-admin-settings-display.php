@@ -14,20 +14,47 @@
 ?>
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
 <div class="wrap">
 		        <div id="icon-themes" class="icon32"></div>  
 		        <h2>Configurações menu lateral</h2>  
 		         <!--NEED THE settings_errors below so that the errors/success messages are shown after submission - wasn't working once we started using add_menu_page and stopped using add_options_page so needed this-->
-				 <?php settings_errors(); ?>  
+				 <?php 
+					 settings_errors(); 
+					 global $wpdb;
+					 $results = $wpdb->get_results("SELECT url,link FROM {$wpdb->prefix}menuLateral;");
+				 ?>  
     <form method="POST" action="../wp-content/plugins/menu-lateral/admin/partials/menu-lateral-admin-query-display.php">
+		<?php foreach($results as $result) { ?>
+			<div>
+			<div class="btn btn-primary mb-3 mt-2" onclick="adicionar()">Adicionar link</div>
+		</div>  
+			
 		<div class="form-group">
 			<label for="">URL</label>
-			<input type="text" class="form-control" name="url" placeholder="Insira a URL da página">
+			<input type="text" class="form-control" name="url" placeholder="Insira a URL da página" value="<?=$result->url?>">
 		</div>
 		<div class="form-group">
 			<label for="">Nome</label>
-			<input type="text" class="form-control" name="link_name" placeholder="Insira a o nome da página">
-		</div>            
-        <?php submit_button(); ?>  
+			<input type="text" class="form-control" name="link_name" placeholder="Insira a o nome da página" value="<?=$result->link?>">
+		</div>
+		<div id="novosCampos"></div>  
+		<?php } ?>
+		<button onclick="submit()" class="btn bnt-primary">
+			Enviar
+		</button>
+		
+		<div>
+		
+		</div>        
+       
     </form> 
 </div>
+<script>
+	function adicionar()
+	{
+		alert('deu certo');
+		var campo = document.getElementById('novosCampos');
+		campo.innerHTML += '<div class="form-group"><label for="">URL</label><input type="text" class="form-control" name="url" placeholder="Insira a URL da página"></div><div class="form-group"><label for="">Nome</label><input type="text" class="form-control" name="link_name" placeholder="Insira a o nome da página"></div>'
+	}
+</script>
