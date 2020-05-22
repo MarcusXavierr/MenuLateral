@@ -10,12 +10,12 @@
  * @package    Menu_Lateral
  * @subpackage Menu_Lateral/admin/partials
  */
-function varDump($data)
-{
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
-}
+// function varDump($data)
+// {
+//     echo "<pre>";
+//     print_r($data);
+//     echo "</pre>";
+// }
 
 function message($message,$type)
 {
@@ -39,7 +39,6 @@ function message($message,$type)
     }
 }
 
-varDump($_POST);
 
 function delete_link()
 {
@@ -64,16 +63,13 @@ function update_link()
 function create_link()
 {
     global $wpdb;
-    echo "entrei";
     $url = $_POST['url'];
     $link_name = $_POST['link_name'];
-    echo "o problema não é na hora de pegar o post";
 
     $table_name = $wpdb->prefix . 'menuLateral';
 
     if($_POST['url'] && $_POST['link_name'])
     {
-        echo "funciona";
         $wpdb->insert(
             $table_name,
             [
@@ -107,7 +103,7 @@ if (isset($_POST['btn-value']))
     {
         if(delete_link())
         {
-            message('Link apagado com sucesso');
+            message('Link apagado com sucesso',1);
         }
         else
         {
@@ -119,7 +115,7 @@ if (isset($_POST['btn-value']))
     {
         if (update_link())
         {
-            message('Link atualizado com sucesso');
+            message('Link atualizado com sucesso',1);
         }
         else
         {
@@ -128,6 +124,10 @@ if (isset($_POST['btn-value']))
     }
 }
 
+else
+{
+    message('Nada a ser feito',1);
+}
 
 ?>
 

@@ -15,8 +15,8 @@
  * @wordpress-plugin
  * Plugin Name:       Menu lateral
  * Plugin URI:        não-possui
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.0
+ * Description:       Esse é um plugin criado para automatizar a inserção de links no menu lateral do site imondelli
+ * Version:           1.0.5
  * Author:            Marcus Xavier
  * Author URI:        não-possui
  * License:           GPL-2.0+

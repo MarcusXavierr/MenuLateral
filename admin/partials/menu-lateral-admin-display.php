@@ -26,7 +26,7 @@ $links = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}menuLateral");
     <!--NEED THE settings_errors below so that the errors/success messages are shown after submission - wasn't working once we started using add_menu_page and stopped using add_options_page so needed this-->
     <h3>Bem vindo ao plugin Menu-lateral!</h3>
     <div>
-    Para usar basta entrar na aba de configurações e adicionar as url e os nomes dos links que você deseja exibir no menu lateral do site
+    Para usar basta entrar na aba de configurações (Settings) e adicionar as url e os nomes dos links que você deseja exibir no menu lateral do site
     </div>
 
     <?php 
