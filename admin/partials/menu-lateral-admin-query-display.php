@@ -41,8 +41,14 @@ function menu_lateral_data()
             ]
         );
     }
+
+    return true;
 }
 
+if (menu_lateral_data())
+{
+    echo "<h1>Link criado com sucesso!</h1>";
+}
 
 
 

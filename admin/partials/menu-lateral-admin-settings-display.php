@@ -24,7 +24,7 @@
 					 global $wpdb;
 					 $results = $wpdb->get_results("SELECT url,link FROM {$wpdb->prefix}menuLateral;");
 				 ?>  
-    <form method="POST" action="../wp-content/plugins/menu-lateral/admin/partials/menu-lateral-admin-query-display.php">
+    <form method="POST" action="admin.php?page=menu-lateral-query">
 		<div class="mb-3 mt-2 d-flex">
 			<div class="btn btn-primary" onclick="adicionar()">Adicionar link</div>
 			<div class="btn btn-danger" onclick="remover()">Remover link</div>
@@ -43,7 +43,7 @@
 		</div>
 		<div id="novosCampos"></div>  
 		<?php } ?>
-		<button onclick="submit()" class="btn bnt-primary">
+		<button onclick="submit()" class="btn btn-success">
 			Enviar
 		</button>
 		
