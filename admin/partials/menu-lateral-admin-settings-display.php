@@ -22,42 +22,47 @@
 				 <?php 
 					 settings_errors(); 
 					 global $wpdb;
-					 $results = $wpdb->get_results("SELECT url,link FROM {$wpdb->prefix}menuLateral;");
+					 $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}menuLateral;");
 				 ?>  
-    <form method="POST" action="admin.php?page=menu-lateral-query">
-		<div class="mb-3 mt-2 d-flex">
-			<div class="btn btn-primary" onclick="adicionar()">Adicionar link</div>
-			<div class="btn btn-danger" onclick="remover()">Remover link</div>
-		</div> 
+    
+		
 		<?php foreach($results as $result) { ?>
-			 
+			<form method="POST" action="admin.php?page=menu-lateral-query">	 
 		<div class="campo">	
 		<div class="form-group">
 			<label for="">URL</label>
 			<input type="text" class="form-control" name="url" placeholder="Insira a URL da página" value="<?=$result->url?>">
 		</div>
+		<input type="hidden" name="id" value="<?=$result->id?>">
 		<div class="form-group">
 			<label for="">Nome</label>
 			<input type="text" class="form-control" name="link_name" placeholder="Insira a o nome da página" value="<?=$result->link?>">
 		</div>
-		</div>
-		<div id="novosCampos"></div>  
+		<button type="submit" name="btn-value" value="delete" class="btn btn-danger">Apagar</button>
+		<button type="submit" name="btn-value" value="update" class="btn btn-warning">Atualizar</button>
+		</div> 
+		</form> 
 		<?php } ?>
-		<button onclick="submit()" class="btn btn-success">
+		<form method="POST" action="admin.php?page=menu-lateral-query">	 
+		<div class="mb-3 mt-5 d-flex">
+			<div class="btn btn-primary" id="add" onclick="adicionar()">Adicionar link</div>
+			<div class="btn btn-danger" id="remove" onclick="remover()" style="visibility:hidden">Remover link</div>
+			<button onclick="submit()" class="btn btn-success" name="btn-value" value="create">
 			Enviar
-		</button>
-		
-		<div>
-		
-		</div>        
+			</button>
+		</div> 
+		<div id="novosCampos"></div> 
+	      
        
-    </form> 
+		</form> 
 </div>
 <script>
 	function adicionar()
 	{
 		var campo = document.getElementById('novosCampos');
 		campo.innerHTML += '<div class="campo"><div class="form-group"><label for="">URL</label><input type="text" class="form-control" name="url" placeholder="Insira a URL da página"></div><div class="form-group"><label for="">Nome</label><input type="text" class="form-control" name="link_name" placeholder="Insira a o nome da página"></div></div>'
+		document.getElementById("add").style.visibility = "hidden";
+		document.getElementById("remove").style.visibility = "visible";
 	}
 
 	function remover()
@@ -68,5 +73,8 @@
 			campos[lastCampo].innerHTML = "";
 			var lastCampo = campos.lenght - 1
 			campos = document.getElementsByClassName('campo');
+			document.getElementById("add").style.visibility = "visible";
+			document.getElementById("remove").style.visibility = "hidden";
+
 	}
 </script>

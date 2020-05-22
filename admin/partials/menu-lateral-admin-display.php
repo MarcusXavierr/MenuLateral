@@ -30,7 +30,7 @@ $links = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}menuLateral");
     </div>
 
     <?php 
-        if ($wpdb->prefix)
+        if (!$wpdb->get_var("SHOW TABLES LIKE {$wpdb->prefix}menuLateral") == $wpdb->menuLateral)
         {
     ?>
         <br>
@@ -48,56 +48,31 @@ $links = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}menuLateral");
         </div>
     <?php
         }
+        else
+        {
+            $results = $wpdb->get_results("SELECT url,link FROM {$wpdb->prefix}menuLateral");
     ?>
-    <body>
-		<nav class="navbar navbar-light bg-light">
-			<div class="container">
-				<a class="navbar-brand" href="#">
-					<img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-					App Lista Tarefas
-				</a>
-			</div>
-		</nav>
+        <h4 class="mt-5">
+            Veja abaixo uma listagem dos links que estão no menu atualmente
+        </h4>
+           <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Url</th>
+                    <th scope="col">Nome do link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach($results as $result){ ?>
+                    <tr>
+                    <td><?=$result->url?></td>
+                    <td><?=$result->link?></td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
 
-		<div class="container app">
-			<div class="row">
-				<div class="col-sm-3 menu">
-					<ul class="list-group">
-						<li class="list-group-item"><a href="index.php">Tarefas pendentes</a></li>
-						<li class="list-group-item"><a href="nova_tarefa.php">Nova tarefa</a></li>
-						<li class="list-group-item active"><a href="#">Todas tarefas</a></li>
-					</ul>
-				</div>
-
-				<div class="col-sm-9">
-					<div class="container pagina">
-						<div class="row">
-							<div class="col">
-								<h4>Todas tarefas</h4>
-								<hr />
-
-								<? foreach($links as $link) { ?>
-									<div class="row mb-3 d-flex align-items-center tarefa">
-										<div class="col-sm-9" id="tarefa_<?= $link->id ?>">
-											<?= $link->url ?> (<?= $link->link ?>)
-										</div>
-										<div class="col-sm-3 mt-2 d-flex justify-content-between">
-											<i class="fas fa-trash-alt fa-lg text-danger" onclick="remover(<?= $link->id ?>)"></i>
-											
-											<? if(true) { ?>
-												<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $link->id ?>, '<?= $link->link ?>')"></i>
-												<i class="fas fa-check-square fa-lg text-success" onclick="marcarRealizada(<?= $link->id ?>)"></i>
-											<? } ?>
-										</div>
-									</div>
-
-								<? } ?>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</body>
+    <?php
+        }
+    ?>
 </div>
