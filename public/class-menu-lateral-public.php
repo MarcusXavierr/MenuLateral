@@ -167,7 +167,7 @@ class Menu_Lateral_Public {
 								foreach($results as $result)
 								{
 							?>
-									<li id="menu-item-1499" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1499"><a href="<?=$result->url?>" class="link link_menu"><?=$result->link?></a></li>
+									<li id="menu-item-1499" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1499"><a href="<?=$result->url?>" class="link link_menu" target="_blank"><?=$result->link?></a></li>
 							<?php 
 								}
 							?>
@@ -187,7 +187,7 @@ class Menu_Lateral_Public {
 		{
 			global $wpdb;
 
-			$results = $wpdb->get_results("SELECT url,link FROM wp_menuLateral");
+			$results = $wpdb->get_results("SELECT url,link FROM {$wpdb->prefix}menuLateral");
 
 			return $results;
 
