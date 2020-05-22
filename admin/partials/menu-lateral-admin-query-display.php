@@ -17,25 +17,48 @@ function varDump($data)
     echo "</pre>";
 }
 
-function message($message)
+function message($message,$type)
 {
+    if($type == 1)
+    {
     ?>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <div class="alert alert-success" role="alert">
-    <?=$message?>
-    </div>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <div class="alert alert-success" role="alert">
+        <?=$message?>
+        </div>
     <?php
-    echo $message;
+    }
+    else
+    {
+    ?>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <div class="alert alert-danger" role="alert">
+        <?=$message?>
+        </div>
+    <?php
+    }
 }
 
 varDump($_POST);
-
 
 function delete_link()
 {
     global $wpdb;
     $id = $_POST['id'];
     $wpdb->delete("{$wpdb->prefix}menuLateral",array('id' => $id));
+    return true;
+}
+
+function update_link()
+{
+    global $wpdb;
+    $id = $_POST['id'];
+    $url = $_POST['url'];
+    $link_name = $_POST['link_name'];
+    $wpdb->update("{$wpdb->prefix}menuLateral", 
+    array('url' => $url, 'link' => $link_name),
+    array('id' => $id)
+    );
     return true;
 }
 function create_link()
@@ -65,25 +88,47 @@ function create_link()
     return false;
 }
 
-if (isset($_POST['btn-value']) && $_POST['btn-value'] == 'create')
+if (isset($_POST['btn-value']))
 {
-    if(create_link())
+    if ($_POST['btn-value'] == 'create')
     {
-        $message = "Link criado com succeso";
-        message($message);
+        if(create_link())
+        {
+            $message = "Link criado com sucesso";
+            message($message,1);
+        }
+        else
+        {
+            message('Problema ao criar link, por favor tente novamente',0);
+        }
+    }
+
+    if ($_POST['btn-value'] == 'delete')
+    {
+        if(delete_link())
+        {
+            message('Link apagado com sucesso');
+        }
+        else
+        {
+            message('Problema ao deletar link, por favor tente novamente',0);
+        }
+    }
+
+    if ($_POST['btn-value'] == 'update')
+    {
+        if (update_link())
+        {
+            message('Link atualizado com sucesso');
+        }
+        else
+        {
+            message('Problema ao atualizar link, por favor tente novamente',0);
+        }
     }
 }
 
-if (isset($_POST['btn-value']) && $_POST['btn-value'] == 'delete')
-{
-    if(delete_link())
-    {
-        message('Link apagado com sucesso');
-    }
-}
 
 ?>
-
-
 
 
